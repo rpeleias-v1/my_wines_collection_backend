@@ -1,4 +1,4 @@
-package com.rodrigopeleias.mywinecollection.controller;
+package com.rodrigopeleias.minhacolecaovinhos.controller;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rodrigopeleias.mywinecollection.model.Vinho;
-import com.rodrigopeleias.mywinecollection.service.VinhoService;
+import com.rodrigopeleias.minhacolecaovinhos.model.Vinho;
+import com.rodrigopeleias.minhacolecaovinhos.service.VinhoService;
 
 @RestController
 @RequestMapping("/vinhos")

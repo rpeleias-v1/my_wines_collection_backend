@@ -1,4 +1,4 @@
-package com.rodrigopeleias.mywinecollection.model;
+package com.rodrigopeleias.minhacolecaovinhos.model;
 
 public enum Uva {
 	

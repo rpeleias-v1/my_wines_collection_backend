@@ -1,6 +1,6 @@
-package com.rodrigopeleias.mywinecollection.service;
+package com.rodrigopeleias.minhacolecaovinhos.service;
 
-import com.rodrigopeleias.mywinecollection.model.Usuario;
+import com.rodrigopeleias.minhacolecaovinhos.model.Usuario;
 
 public interface UsuarioService {
 

@@ -1,4 +1,4 @@
-package com.rodrigopeleias.mywinecollection.model;
+package com.rodrigopeleias.minhacolecaovinhos.model;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

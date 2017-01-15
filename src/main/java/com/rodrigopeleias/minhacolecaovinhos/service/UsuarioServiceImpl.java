@@ -1,10 +1,10 @@
-package com.rodrigopeleias.mywinecollection.service;
+package com.rodrigopeleias.minhacolecaovinhos.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rodrigopeleias.mywinecollection.model.Usuario;
-import com.rodrigopeleias.mywinecollection.repository.UsuarioRepository;
+import com.rodrigopeleias.minhacolecaovinhos.model.Usuario;
+import com.rodrigopeleias.minhacolecaovinhos.repository.UsuarioRepository;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {

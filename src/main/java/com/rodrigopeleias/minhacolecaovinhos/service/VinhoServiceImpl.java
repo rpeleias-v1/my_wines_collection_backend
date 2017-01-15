@@ -1,12 +1,12 @@
-package com.rodrigopeleias.mywinecollection.service;
+package com.rodrigopeleias.minhacolecaovinhos.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rodrigopeleias.mywinecollection.model.Vinho;
-import com.rodrigopeleias.mywinecollection.repository.VinhoRepository;
+import com.rodrigopeleias.minhacolecaovinhos.model.Vinho;
+import com.rodrigopeleias.minhacolecaovinhos.repository.VinhoRepository;
 
 @Service
 public class VinhoServiceImpl implements VinhoService {

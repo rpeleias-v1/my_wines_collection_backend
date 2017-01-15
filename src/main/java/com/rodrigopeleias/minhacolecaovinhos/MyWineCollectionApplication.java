@@ -1,4 +1,4 @@
-package com.rodrigopeleias.mywinecollection;
+package com.rodrigopeleias.minhacolecaovinhos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

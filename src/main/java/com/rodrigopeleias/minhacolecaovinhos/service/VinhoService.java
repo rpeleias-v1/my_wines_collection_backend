@@ -1,8 +1,8 @@
-package com.rodrigopeleias.mywinecollection.service;
+package com.rodrigopeleias.minhacolecaovinhos.service;
 
 import java.util.List;
 
-import com.rodrigopeleias.mywinecollection.model.Vinho;
+import com.rodrigopeleias.minhacolecaovinhos.model.Vinho;
 
 public interface VinhoService {
 
