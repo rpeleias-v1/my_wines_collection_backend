@@ -5,7 +5,12 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Vinho {
@@ -14,23 +19,30 @@ public class Vinho {
 	@GeneratedValue
 	private Long id;
 
+	@NotEmpty(message = "Nome do vinho é um campo obrigatório")
 	private String nome;
 
+	@NotNull(message = "Tipo da uva é um campo obrigatório")
 	@Enumerated(EnumType.STRING)
 	private Uva uva;
 
+	@NotNull(message = "Classificação do vinho é um campo obrigatório")
 	@Enumerated(EnumType.STRING)
 	private Classificacao classificacao;
 
+	@Min(value = 1900, message = "O ano de safra de um vinho deve ser um valor entre 1900 e 2017")
+	@Max(value = 2016, message = "O ano de safra de um vinho deve ser um valor entre 1900 e 2017")
 	private int anoSafra;
 
+	@NotEmpty(message = "Nome do fabricante é um campo obrigatório")
 	private String fabricante;
 
 	private float teorAlcoolico;
 
+	@NotEmpty(message = "O nome do país de origem é um campo obrigatório")
 	private String paisOrigem;
 
-	@OneToMany(mappedBy = "vinhos")
+	@ManyToOne
 	private Usuario usuario;
 
 	public Long getId() {

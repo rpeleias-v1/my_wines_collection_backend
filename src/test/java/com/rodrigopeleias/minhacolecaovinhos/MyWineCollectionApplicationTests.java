@@ -1,4 +1,4 @@
-package com.rodrigopeleias.mywinecollection;
+package com.rodrigopeleias.minhacolecaovinhos;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

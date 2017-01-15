@@ -3,11 +3,17 @@ package com.rodrigopeleias.minhacolecaovinhos.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Usuario {
@@ -15,14 +21,27 @@ public class Usuario {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@NotEmpty(message = "Nome do usuário é um campo obrigatório")
 	private String nome;
+	
+	@NotEmpty(message = "Senha do usuário é um campo obrigatório")
 	private String senha;
+	
+	@Column(unique = true)
+	@NotEmpty(message = "E-mail do usuário é um campo obrigatório")
+	@Email(message = "Formato de e-mail informado está inválido")
 	private String email;
-	private String usuario;
+	
+	@Column(unique = true)
+	@NotEmpty(message = "Login do usuário é um campo obrigatório")
+	private String login;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	List<Vinho> vinhos;
+	@OneToMany(fetch = FetchType.EAGER)
+	private List<Vinho> vinhos;
 
 	public Long getId() {
 		return id;
@@ -56,12 +75,12 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public String getUsuario() {
-		return usuario;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public Date getDataCriacao() {
@@ -87,7 +106,7 @@ public class Usuario {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		return result;
 	}
 
@@ -115,17 +134,17 @@ public class Usuario {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (usuario == null) {
-			if (other.usuario != null)
+		if (login == null) {
+			if (other.login != null)
 				return false;
-		} else if (!usuario.equals(other.usuario))
+		} else if (!login.equals(other.login))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", senha=" + senha + ", email=" + email + ", usuario=" + usuario
+		return "Usuario [id=" + id + ", nome=" + nome + ", senha=" + senha + ", email=" + email + ", login=" + login
 				+ ", dataCriacao=" + dataCriacao + "]";
 	}
 
