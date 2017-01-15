@@ -5,6 +5,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Wine {
@@ -28,6 +29,9 @@ public class Wine {
 	private float alcoholPercent;
 	
 	private String country;
+	
+	@OneToMany(mappedBy = "wines")
+	private User user;
 
 	public Long getId() {
 		return id;
