@@ -9,33 +9,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rodrigopeleias.mywinecollection.model.User;
-import com.rodrigopeleias.mywinecollection.service.UserService;
+import com.rodrigopeleias.mywinecollection.model.Usuario;
+import com.rodrigopeleias.mywinecollection.service.UsuarioService;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/usuarios")
+public class UsuarioController {
 
-	private UserService userService;
+	private UsuarioService usuarioService;
 
 	@Autowired
-	public UserController(UserService userService) {
-		this.userService = userService;
+	public UsuarioController(UsuarioService usuarioService) {
+		this.usuarioService = usuarioService;
 	}
 
 	@PostMapping
-	public User save(@RequestBody User user) {
-		return userService.save(user);
+	public Usuario save(@RequestBody Usuario usuario) {
+		return usuarioService.save(usuario);
 	}
 
 	@GetMapping(value = "/{id}")
-	public User findOne(@PathVariable Long id) {
-		return userService.findOne(id);
+	public Usuario findOne(@PathVariable Long id) {
+		return usuarioService.findOne(id);
 	}
 	
 	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable Long id) {
-		userService.delete(id);
+		usuarioService.delete(id);
 	}
 
 }

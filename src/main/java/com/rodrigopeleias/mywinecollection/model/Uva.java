@@ -1,6 +1,6 @@
 package com.rodrigopeleias.mywinecollection.model;
 
-public enum Grape {
+public enum Uva {
 	
 	CABERNET_SAUVIGNON, 
 	CARMENERE, 

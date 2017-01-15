@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.rodrigopeleias</groupId>
-	<artifactId>mywinecollection</artifactId>
+	<artifactId>minhacolecaovinhos</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>my-wine-collection</name>
-	<description>Backend project for my wine collections</description>
+	<name>minha-colecao-vinhos</name>
+	<description>Projeto backend da minha coleção de vinhos</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

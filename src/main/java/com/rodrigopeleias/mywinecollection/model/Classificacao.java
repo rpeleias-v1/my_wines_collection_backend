@@ -1,7 +1,7 @@
 package com.rodrigopeleias.mywinecollection.model;
 
-public enum Classification {
+public enum Classificacao {
 	
-	TINTO, WHITE;
+	TINTO, BRANCO;
 
 }

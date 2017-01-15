@@ -12,42 +12,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rodrigopeleias.mywinecollection.model.Wine;
-import com.rodrigopeleias.mywinecollection.service.WineService;
+import com.rodrigopeleias.mywinecollection.model.Vinho;
+import com.rodrigopeleias.mywinecollection.service.VinhoService;
 
 @RestController
-@RequestMapping("/wines")
-public class WineController {
+@RequestMapping("/vinhos")
+public class VinhoController {
 
-	private WineService wineService;
+	private VinhoService vinhoService;
 
 	@Autowired
-	public WineController(WineService wineService) {
-		this.wineService = wineService;
+	public VinhoController(VinhoService vinhoService) {
+		this.vinhoService = vinhoService;
 	}
 
 	@PostMapping
-	public Wine save(@RequestBody Wine wine) {
-		return wineService.save(wine);
+	public Vinho save(@RequestBody Vinho vinho) {
+		return vinhoService.save(vinho);
 	}
 
 	@GetMapping
-	public List<Wine> findAll() {
-		return wineService.findAll();
+	public List<Vinho> findAll() {
+		return vinhoService.findAll();
 	}
 
 	@GetMapping(value = "/{id}")
-	public Wine findOne(@PathVariable Long id) {
-		return wineService.findOne(id);
+	public Vinho findOne(@PathVariable Long id) {
+		return vinhoService.findOne(id);
 	}
 	
 	@PutMapping(value = "/{id}")
-	public Wine update(@PathVariable Long id, @RequestBody Wine wine) {
-		return wineService.save(wine);
+	public Vinho update(@PathVariable Long id, @RequestBody Vinho vinho) {
+		return vinhoService.save(vinho);
 	}
 
 	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable Long id) {
-		wineService.delete(id);
+		vinhoService.delete(id);
 	}
 }

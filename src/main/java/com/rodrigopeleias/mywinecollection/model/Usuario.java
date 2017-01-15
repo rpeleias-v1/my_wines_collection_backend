@@ -10,19 +10,19 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class User {
+public class Usuario {
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	private String name;
-	private String password;
+	private String nome;
+	private String senha;
 	private String email;
-	private String username;
-	private Date creation;
-	
+	private String usuario;
+	private Date dataCriacao;
+
 	@ManyToOne(fetch = FetchType.EAGER)
-	List<Wine> wines;
+	List<Vinho> vinhos;
 
 	public Long getId() {
 		return id;
@@ -32,20 +32,20 @@ public class User {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public String getEmail() {
@@ -56,28 +56,28 @@ public class User {
 		this.email = email;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
-	public Date getCreation() {
-		return creation;
+	public Date getDataCriacao() {
+		return dataCriacao;
 	}
 
-	public void setCreation(Date creation) {
-		this.creation = creation;
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
 	}
 
-	public List<Wine> getWines() {
-		return wines;
+	public List<Vinho> getVinhos() {
+		return vinhos;
 	}
 
-	public void setWines(List<Wine> wines) {
-		this.wines = wines;
+	public void setVinhos(List<Vinho> vinhos) {
+		this.vinhos = vinhos;
 	}
 
 	@Override
@@ -86,8 +86,8 @@ public class User {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
 
@@ -99,7 +99,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Usuario other = (Usuario) obj;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -110,22 +110,23 @@ public class User {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (nome == null) {
+			if (other.nome != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!nome.equals(other.nome))
 			return false;
-		if (username == null) {
-			if (other.username != null)
+		if (usuario == null) {
+			if (other.usuario != null)
 				return false;
-		} else if (!username.equals(other.username))
+		} else if (!usuario.equals(other.usuario))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", username="
-				+ username + "]";
+		return "Usuario [id=" + id + ", nome=" + nome + ", senha=" + senha + ", email=" + email + ", usuario=" + usuario
+				+ ", dataCriacao=" + dataCriacao + "]";
 	}
+
 }
