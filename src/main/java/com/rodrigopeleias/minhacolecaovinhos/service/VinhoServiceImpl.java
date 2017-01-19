@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rodrigopeleias.minhacolecaovinhos.exception.VinhoNaoEncontradoException;
 import com.rodrigopeleias.minhacolecaovinhos.model.Vinho;
 import com.rodrigopeleias.minhacolecaovinhos.repository.VinhoRepository;
 
@@ -19,22 +20,31 @@ public class VinhoServiceImpl implements VinhoService {
 	}
 
 	@Override
-	public Vinho save(Vinho vinho) {
+	public Vinho criar(Vinho vinho) {
 		return vinhoRepository.save(vinho);
 	}
 	
 	@Override
-	public List<Vinho> findAll() {
+	public List<Vinho> listarTodos() {
 		return vinhoRepository.findAll();
+	}
+	
+	@Override
+	public Vinho atualizar(Long id, Vinho vinho) {
+		Vinho vinhoCadastrado = vinhoRepository.findOne(id);
+		if(vinhoCadastrado == null) {
+			throw new VinhoNaoEncontradoException(id);
+		}
+		return vinhoRepository.save(vinho);
 	}
 
 	@Override
-	public Vinho findOne(Long id) {
+	public Vinho consultar(Long id) {
 		return vinhoRepository.findOne(id);
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void excluir(Long id) {
 		vinhoRepository.delete(id);
 	}
 }

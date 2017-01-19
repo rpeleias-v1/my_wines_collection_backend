@@ -42,6 +42,7 @@ public class Vinho {
 	@NotEmpty(message = "O nome do país de origem é um campo obrigatório")
 	private String paisOrigem;
 
+	@NotNull(message ="O vinho não pode ser cadastrado sem um usuário dono")
 	@ManyToOne
 	private Usuario usuario;
 

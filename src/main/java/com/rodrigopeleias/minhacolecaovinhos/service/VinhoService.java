@@ -6,12 +6,14 @@ import com.rodrigopeleias.minhacolecaovinhos.model.Vinho;
 
 public interface VinhoService {
 
-	Vinho save(Vinho vinho);
+	Vinho criar(Vinho vinho);
 
-	List<Vinho> findAll();
+	List<Vinho> listarTodos();
 
-	Vinho findOne(Long id);
+	Vinho consultar(Long id);
 
-	void delete(Long id);
+	void excluir(Long id);
+
+	Vinho atualizar(Long id, Vinho vinho);
 
 }

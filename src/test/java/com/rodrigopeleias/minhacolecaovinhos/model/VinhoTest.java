@@ -2,6 +2,7 @@ package com.rodrigopeleias.minhacolecaovinhos.model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -33,6 +34,7 @@ public class VinhoTest {
 		vinho.setFabricante("Concha Y Toro");
 		vinho.setTeorAlcoolico(4.5F);
 		vinho.setPaisOrigem("Chile");
+		vinho.setUsuario(criarUsuario());
 		
 		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
 
@@ -49,6 +51,7 @@ public class VinhoTest {
 		vinho.setFabricante("Concha Y Toro");
 		vinho.setTeorAlcoolico(4.5F);
 		vinho.setPaisOrigem("Chile");
+		vinho.setUsuario(criarUsuario());
 		
 		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
 
@@ -66,6 +69,7 @@ public class VinhoTest {
 		vinho.setFabricante("Concha Y Toro");
 		vinho.setTeorAlcoolico(4.5F);
 		vinho.setPaisOrigem("Chile");
+		vinho.setUsuario(criarUsuario());
 		
 		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
 
@@ -83,6 +87,7 @@ public class VinhoTest {
 		vinho.setFabricante("Concha Y Toro");
 		vinho.setTeorAlcoolico(4.5F);
 		vinho.setPaisOrigem("Chile");
+		vinho.setUsuario(criarUsuario());
 		
 		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
 
@@ -101,6 +106,7 @@ public class VinhoTest {
 		vinho.setFabricante("Concha Y Toro");
 		vinho.setTeorAlcoolico(4.5F);
 		vinho.setPaisOrigem("Chile");
+		vinho.setUsuario(criarUsuario());
 		
 		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
 
@@ -119,6 +125,7 @@ public class VinhoTest {
 		vinho.setFabricante("Concha Y Toro");
 		vinho.setTeorAlcoolico(4.5F);
 		vinho.setPaisOrigem("Chile");
+		vinho.setUsuario(criarUsuario());
 		
 		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
 
@@ -136,6 +143,7 @@ public class VinhoTest {
 		vinho.setAnoSafra(2012);
 		vinho.setTeorAlcoolico(4.5F);
 		vinho.setPaisOrigem("Chile");
+		vinho.setUsuario(criarUsuario());
 		
 		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
 
@@ -153,11 +161,41 @@ public class VinhoTest {
 		vinho.setAnoSafra(2012);
 		vinho.setFabricante("Concha Y Toro");
 		vinho.setTeorAlcoolico(4.5F);
+		vinho.setUsuario(criarUsuario());
 		
 		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
 
 		assertEquals(1, violacoesValidacao.size());
 		assertEquals("O nome do país de origem é um campo obrigatório", violacoesValidacao.iterator().next().getMessage());
+	}
+	
+	@Test
+	public void testDeveValidarUsuarioNulo() {
+		Vinho vinho = new Vinho();
+		vinho.setId(1L);
+		vinho.setNome("Casillero Del Diablo");
+		vinho.setUva(Uva.CABERNET_SAUVIGNON);
+		vinho.setClassificacao(Classificacao.TINTO);
+		vinho.setAnoSafra(2012);
+		vinho.setFabricante("Concha Y Toro");
+		vinho.setTeorAlcoolico(4.5F);
+		vinho.setPaisOrigem("Chile");
+		
+		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
+
+		assertEquals(1, violacoesValidacao.size());
+		assertEquals("O vinho não pode ser cadastrado sem um usuário dono", violacoesValidacao.iterator().next().getMessage());
+	}
+	
+	private Usuario criarUsuario() {
+		Usuario usuario = new Usuario();
+		usuario.setNome("Rodrigo Peleias");
+		usuario.setEmail("rpeleias@hotmail.com");
+		usuario.setDataCriacao(new Date());
+		usuario.setLogin("rpeleias");
+		usuario.setSenha("123");
+		
+		return usuario;
 	}
 
 }

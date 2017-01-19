@@ -25,17 +25,17 @@ public class UsuarioController {
 
 	@PostMapping
 	public Usuario save(@RequestBody Usuario usuario) {
-		return usuarioService.save(usuario);
+		return usuarioService.cadastrar(usuario);
 	}
 
 	@GetMapping(value = "/{id}")
 	public Usuario findOne(@PathVariable Long id) {
-		return usuarioService.findOne(id);
+		return usuarioService.consultar(id);
 	}
 	
 	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable Long id) {
-		usuarioService.delete(id);
+		usuarioService.excluir(id);
 	}
 
 }

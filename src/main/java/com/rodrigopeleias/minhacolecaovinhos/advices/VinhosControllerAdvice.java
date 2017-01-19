@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.rodrigopeleias.minhacolecaovinhos.advices.mensagens.ConstraintViolationMessage;
 import com.rodrigopeleias.minhacolecaovinhos.advices.mensagens.MessagemErroCustomizada;
+import com.rodrigopeleias.minhacolecaovinhos.exception.VinhoNaoEncontradoException;
 
 @ControllerAdvice
 public class VinhosControllerAdvice extends ResponseEntityExceptionHandler {
@@ -31,6 +32,15 @@ public class VinhosControllerAdvice extends ResponseEntityExceptionHandler {
 					constraintViolation.getMessage(), constraintViolation.getInvalidValue());
 			mensagem.addConstraintViolationMessage(constraintViolationMessage);
 		}
+		return new ResponseEntity<>(mensagem, status);
+	}
+	
+	@ExceptionHandler(VinhoNaoEncontradoException.class)
+	@ResponseBody
+	ResponseEntity<?> handleException(HttpServletRequest request, VinhoNaoEncontradoException exception) {
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		MessagemErroCustomizada mensagem = new MessagemErroCustomizada(status.value(),
+				exception.getClass().getSimpleName(), request.getRequestURI());
 		return new ResponseEntity<>(mensagem, status);
 	}
 

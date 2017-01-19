@@ -28,26 +28,27 @@ public class VinhoController {
 
 	@PostMapping
 	public Vinho save(@RequestBody Vinho vinho) {
-		return vinhoService.save(vinho);
+		return vinhoService.criar(vinho);
 	}
 
 	@GetMapping
 	public List<Vinho> findAll() {
-		return vinhoService.findAll();
+		return vinhoService.listarTodos();
 	}
 
 	@GetMapping(value = "/{id}")
 	public Vinho findOne(@PathVariable Long id) {
-		return vinhoService.findOne(id);
+		return vinhoService.consultar(id);
 	}
 	
+	//TODO criar teste do método atualizar no service
 	@PutMapping(value = "/{id}")
 	public Vinho update(@PathVariable Long id, @RequestBody Vinho vinho) {
-		return vinhoService.save(vinho);
+		return vinhoService.atualizar(id, vinho);
 	}
 
 	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable Long id) {
-		vinhoService.delete(id);
+		vinhoService.excluir(id);
 	}
 }

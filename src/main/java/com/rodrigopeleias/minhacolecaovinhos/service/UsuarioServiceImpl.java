@@ -17,17 +17,17 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public Usuario save(Usuario usuario) {
+	public Usuario cadastrar(Usuario usuario) {
 		return usuarioRepository.save(usuario);
 	}
 
 	@Override
-	public Usuario findOne(Long id) {
+	public Usuario consultar(Long id) {
 		return usuarioRepository.findOne(id);
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void excluir(Long id) {
 		usuarioRepository.delete(id);
 	}
 	
