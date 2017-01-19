@@ -41,7 +41,6 @@ public class VinhoController {
 		return vinhoService.consultar(id);
 	}
 	
-	//TODO criar teste do método atualizar no service
 	@PutMapping(value = "/{id}")
 	public Vinho update(@PathVariable Long id, @RequestBody Vinho vinho) {
 		return vinhoService.atualizar(id, vinho);
