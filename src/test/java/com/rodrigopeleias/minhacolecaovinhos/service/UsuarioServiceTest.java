@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.rodrigopeleias.minhacolecaovinhos.builder.UsuarioBuilder;
 import com.rodrigopeleias.minhacolecaovinhos.model.Usuario;
 import com.rodrigopeleias.minhacolecaovinhos.repository.UsuarioRepository;
 
@@ -58,12 +59,13 @@ public class UsuarioServiceTest {
 	}
 	
 	private Usuario criarUsuario() {
-		Usuario usuario = new Usuario();
-		usuario.setNome("Rodrigo Peleias");
-		usuario.setEmail("rpeleias@hotmail.com");
-		usuario.setDataCriacao(new Date());
-		usuario.setLogin("rpeleias");
-		usuario.setSenha("123");
+		Usuario usuario = new UsuarioBuilder()
+				.comNome("Rodrigo Peleias")
+				.comSenha("123")
+				.comLogin("rpeleias")
+				.comDataCriacao(new Date())
+				.comEmail("rpeleias@hotmail.com")
+				.build();
 		return usuario;
 	}
 

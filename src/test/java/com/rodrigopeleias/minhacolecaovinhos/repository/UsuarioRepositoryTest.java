@@ -17,6 +17,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.rodrigopeleias.minhacolecaovinhos.builder.UsuarioBuilder;
 import com.rodrigopeleias.minhacolecaovinhos.model.Usuario;
 
 @RunWith(SpringRunner.class)
@@ -88,12 +89,13 @@ public class UsuarioRepositoryTest {
 	}
 
 	private Usuario criarUsuario() {
-		Usuario usuario = new Usuario();
-		usuario.setNome("Rodrigo Peleias");
-		usuario.setEmail("rpeleias@hotmail.com");
-		usuario.setDataCriacao(new Date());
-		usuario.setLogin("rpeleias");
-		usuario.setSenha("123");
+		Usuario usuario = new UsuarioBuilder()
+				.comNome("Rodrigo Peleias")
+				.comSenha("123")
+				.comLogin("rpeleias")
+				.comDataCriacao(new Date())
+				.comEmail("rpeleias@hotmail.com")
+				.build();
 		return usuario;
 	}
 	

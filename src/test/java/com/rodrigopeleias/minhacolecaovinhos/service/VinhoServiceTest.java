@@ -17,6 +17,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.rodrigopeleias.minhacolecaovinhos.builder.UsuarioBuilder;
+import com.rodrigopeleias.minhacolecaovinhos.builder.VinhoBuilder;
 import com.rodrigopeleias.minhacolecaovinhos.exception.VinhoNaoEncontradoException;
 import com.rodrigopeleias.minhacolecaovinhos.model.Classificacao;
 import com.rodrigopeleias.minhacolecaovinhos.model.Usuario;
@@ -99,25 +101,27 @@ public class VinhoServiceTest {
 	}
 	
 	private Vinho criarVinho() {
-		Vinho vinho = new Vinho();
-		vinho.setNome("Casilleero Del Diablo");
-		vinho.setAnoSafra(2014);
-		vinho.setClassificacao(Classificacao.TINTO);
-		vinho.setPaisOrigem("Chile");
-		vinho.setFabricante("Concha Y Toro");
-		vinho.setUva(Uva.CABERNET_SAUVIGNON);
-		vinho.setUsuario(criarUsuario());
+		Vinho vinho = new VinhoBuilder()
+				.comNome("Casilleto Del Diablo")
+				.comUva(Uva.CABERNET_SAUVIGNON)
+				.comClassificacao(Classificacao.TINTO)
+				.comAnoSafra(2012)
+				.comFabricante("Concha Y Toro")
+				.comTeorAlcoolico(4.5F)
+				.comPaisOrigem("Chile")
+				.comUsuario(criarUsuario())
+				.build();
 		return vinho;
 	}
 	
 	private Usuario criarUsuario() {
-		Usuario usuario = new Usuario();
-		usuario.setNome("Rodrigo Peleias");
-		usuario.setEmail("rpeleias@hotmail.com");
-		usuario.setDataCriacao(new Date());
-		usuario.setLogin("rpeleias");
-		usuario.setSenha("123");
-		
+		Usuario usuario = new UsuarioBuilder()
+				.comNome("Rodrigo Peleias")
+				.comSenha("123")
+				.comLogin("rpeleias")
+				.comDataCriacao(new Date())
+				.comEmail("rpeleias@hotmail.com")
+				.build();
 		return usuario;
 	}
 

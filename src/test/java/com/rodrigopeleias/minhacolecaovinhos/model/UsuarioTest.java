@@ -13,25 +13,30 @@ import javax.validation.ValidatorFactory;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.rodrigopeleias.minhacolecaovinhos.builder.UsuarioBuilder;
+
 public class UsuarioTest {
 
 	private Validator validator;
+	private UsuarioBuilder usuarioBuilder;
 
 	@Before
 	public void setupValidator() {
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
+		usuarioBuilder = new UsuarioBuilder();
 	}
 
 	@Test
 	public void testTodosCamposValidos() {
-		Usuario usuario = new Usuario();
-		usuario.setId(1L);
-		usuario.setNome("Rodrigo Peleias");
-		usuario.setLogin("rpeleias");
-		usuario.setEmail("rpeleias@hotmail.com");
-		usuario.setSenha("123");
-		usuario.setDataCriacao(new Date());
+		Usuario usuario = usuarioBuilder
+			.comId(1L)
+			.comNome("Rodrigo Peleias")
+			.comSenha("123")
+			.comLogin("rpeleias")
+			.comDataCriacao(new Date())
+			.comEmail("rpeleias@hotmail.com")
+			.build();
 
 		Set<ConstraintViolation<Usuario>> violacoesValidacao = validator.validate(usuario);
 
@@ -40,13 +45,14 @@ public class UsuarioTest {
 
 	@Test
 	public void testDeveValidarNomeNulo() {
-		Usuario usuario = new Usuario();
-		usuario.setId(1L);
-		usuario.setLogin("rpeleias");
-		usuario.setEmail("rpeleias@hotmail.com");
-		usuario.setSenha("123");
-		usuario.setDataCriacao(new Date());
-
+		Usuario usuario = usuarioBuilder
+				.comId(1L)
+				.comSenha("123")
+				.comLogin("rpeleias")
+				.comDataCriacao(new Date())
+				.comEmail("rpeleias@hotmail.com")
+				.build();
+		
 		Set<ConstraintViolation<Usuario>> violacoesValidacao = validator.validate(usuario);
 
 		assertEquals(1, violacoesValidacao.size());
@@ -55,12 +61,13 @@ public class UsuarioTest {
 
 	@Test
 	public void testDeveValidarLoginNulo() {
-		Usuario usuario = new Usuario();
-		usuario.setId(1L);
-		usuario.setNome("Rodrigo Peleias");
-		usuario.setEmail("rpeleias@hotmail.com");
-		usuario.setSenha("123");
-		usuario.setDataCriacao(new Date());
+		Usuario usuario = usuarioBuilder
+				.comId(1L)
+				.comNome("Rodrigo Peleias")
+				.comSenha("123")
+				.comDataCriacao(new Date())
+				.comEmail("rpeleias@hotmail.com")
+				.build();
 
 		Set<ConstraintViolation<Usuario>> violacoesValidacao = validator.validate(usuario);
 
@@ -70,12 +77,13 @@ public class UsuarioTest {
 
 	@Test
 	public void testDeveValidarEmailNulo() {
-		Usuario usuario = new Usuario();
-		usuario.setId(1L);
-		usuario.setNome("Rodrigo Peleias");
-		usuario.setLogin("rpeleias");
-		usuario.setSenha("123");
-		usuario.setDataCriacao(new Date());
+		Usuario usuario = usuarioBuilder
+				.comId(1L)
+				.comNome("Rodrigo Peleias")
+				.comSenha("123")
+				.comLogin("rpeleias")
+				.comDataCriacao(new Date())
+				.build();
 
 		Set<ConstraintViolation<Usuario>> violacoesValidacao = validator.validate(usuario);
 
@@ -85,13 +93,14 @@ public class UsuarioTest {
 
 	@Test
 	public void testDeveValidarEmailInvalido() {
-		Usuario usuario = new Usuario();
-		usuario.setId(1L);
-		usuario.setNome("Rodrigo Peleias");
-		usuario.setLogin("rpeleias");
-		usuario.setEmail("errado");
-		usuario.setSenha("123");
-		usuario.setDataCriacao(new Date());
+		Usuario usuario = usuarioBuilder
+				.comId(1L)
+				.comNome("Rodrigo Peleias")
+				.comSenha("123")
+				.comLogin("rpeleias")
+				.comDataCriacao(new Date())
+				.comEmail("errado")
+				.build();
 
 		Set<ConstraintViolation<Usuario>> violacoesValidacao = validator.validate(usuario);
 
@@ -101,13 +110,13 @@ public class UsuarioTest {
 
 	@Test
 	public void testDeveValidarSenhaObrigatoria() {
-		Usuario usuario = new Usuario();
-		usuario.setId(1L);
-		usuario.setNome("Rodrigo Peleias");
-		usuario.setLogin("rpeleias");
-		usuario.setEmail("rpeleias@hotmail.com");
-		usuario.setDataCriacao(new Date());
-
+		Usuario usuario = usuarioBuilder
+				.comId(1L)
+				.comNome("Rodrigo Peleias")
+				.comLogin("rpeleias")
+				.comDataCriacao(new Date())
+				.comEmail("rpeleias@hotmail.com")
+				.build();
 		Set<ConstraintViolation<Usuario>> violacoesValidacao = validator.validate(usuario);
 
 		assertEquals(1, violacoesValidacao.size());

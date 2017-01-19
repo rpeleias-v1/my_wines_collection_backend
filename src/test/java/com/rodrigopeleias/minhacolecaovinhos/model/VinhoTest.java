@@ -13,28 +13,34 @@ import javax.validation.ValidatorFactory;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.rodrigopeleias.minhacolecaovinhos.builder.UsuarioBuilder;
+import com.rodrigopeleias.minhacolecaovinhos.builder.VinhoBuilder;
+
 public class VinhoTest {
 
 	private Validator validator;
+	private VinhoBuilder vinhoBuilder;
 
 	@Before
 	public void setupValidator() {
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
+		vinhoBuilder = new VinhoBuilder();
 	}
 	
 	@Test
 	public void testTodosCamposValidos() {
-		Vinho vinho = new Vinho();
-		vinho.setId(1L);
-		vinho.setNome("Casillero Del Diablo");
-		vinho.setUva(Uva.CABERNET_SAUVIGNON);
-		vinho.setClassificacao(Classificacao.TINTO);
-		vinho.setAnoSafra(2012);
-		vinho.setFabricante("Concha Y Toro");
-		vinho.setTeorAlcoolico(4.5F);
-		vinho.setPaisOrigem("Chile");
-		vinho.setUsuario(criarUsuario());
+		Vinho vinho = vinhoBuilder
+			.comId(1L)
+			.comNome("Casilleto Del Diablo")
+			.comUva(Uva.CABERNET_SAUVIGNON)
+			.comClassificacao(Classificacao.TINTO)
+			.comAnoSafra(2012)
+			.comFabricante("Concha Y Toro")
+			.comTeorAlcoolico(4.5F)
+			.comPaisOrigem("Chile")
+			.comUsuario(criarUsuario())
+			.build();
 		
 		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
 
@@ -43,15 +49,16 @@ public class VinhoTest {
 	
 	@Test
 	public void testDeveValidarNomeNulo() {
-		Vinho vinho = new Vinho();
-		vinho.setId(1L);
-		vinho.setUva(Uva.CABERNET_SAUVIGNON);
-		vinho.setClassificacao(Classificacao.TINTO);
-		vinho.setAnoSafra(2012);
-		vinho.setFabricante("Concha Y Toro");
-		vinho.setTeorAlcoolico(4.5F);
-		vinho.setPaisOrigem("Chile");
-		vinho.setUsuario(criarUsuario());
+		Vinho vinho = vinhoBuilder
+				.comId(1L)
+				.comUva(Uva.CABERNET_SAUVIGNON)
+				.comClassificacao(Classificacao.TINTO)
+				.comAnoSafra(2012)
+				.comFabricante("Concha Y Toro")
+				.comTeorAlcoolico(4.5F)
+				.comPaisOrigem("Chile")
+				.comUsuario(criarUsuario())
+				.build();
 		
 		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
 
@@ -61,15 +68,16 @@ public class VinhoTest {
 	
 	@Test
 	public void testDeveValidarUvaNula() {
-		Vinho vinho = new Vinho();
-		vinho.setId(1L);
-		vinho.setNome("Casillero Del Diablo");
-		vinho.setClassificacao(Classificacao.TINTO);
-		vinho.setAnoSafra(2012);
-		vinho.setFabricante("Concha Y Toro");
-		vinho.setTeorAlcoolico(4.5F);
-		vinho.setPaisOrigem("Chile");
-		vinho.setUsuario(criarUsuario());
+		Vinho vinho = vinhoBuilder
+				.comId(1L)
+				.comNome("Casilleto Del Diablo")
+				.comClassificacao(Classificacao.TINTO)
+				.comAnoSafra(2012)
+				.comFabricante("Concha Y Toro")
+				.comTeorAlcoolico(4.5F)
+				.comPaisOrigem("Chile")
+				.comUsuario(criarUsuario())
+				.build();
 		
 		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
 
@@ -79,15 +87,16 @@ public class VinhoTest {
 	
 	@Test
 	public void testDeveValidarClassificacaoNula() {
-		Vinho vinho = new Vinho();
-		vinho.setId(1L);
-		vinho.setNome("Casillero Del Diablo");
-		vinho.setUva(Uva.CABERNET_SAUVIGNON);
-		vinho.setAnoSafra(2012);
-		vinho.setFabricante("Concha Y Toro");
-		vinho.setTeorAlcoolico(4.5F);
-		vinho.setPaisOrigem("Chile");
-		vinho.setUsuario(criarUsuario());
+		Vinho vinho = vinhoBuilder
+				.comId(1L)
+				.comNome("Casilleto Del Diablo")
+				.comUva(Uva.CABERNET_SAUVIGNON)
+				.comAnoSafra(2012)
+				.comFabricante("Concha Y Toro")
+				.comTeorAlcoolico(4.5F)
+				.comPaisOrigem("Chile")
+				.comUsuario(criarUsuario())
+				.build();
 		
 		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
 
@@ -97,17 +106,17 @@ public class VinhoTest {
 	
 	@Test
 	public void testDeveValidarAnoSafraMenorMinimo() {
-		Vinho vinho = new Vinho();
-		vinho.setId(1L);
-		vinho.setNome("Casillero Del Diablo");
-		vinho.setUva(Uva.CABERNET_SAUVIGNON);
-		vinho.setClassificacao(Classificacao.TINTO);
-		vinho.setAnoSafra(1899);
-		vinho.setFabricante("Concha Y Toro");
-		vinho.setTeorAlcoolico(4.5F);
-		vinho.setPaisOrigem("Chile");
-		vinho.setUsuario(criarUsuario());
-		
+		Vinho vinho = vinhoBuilder
+				.comId(1L)
+				.comNome("Casilleto Del Diablo")
+				.comUva(Uva.CABERNET_SAUVIGNON)
+				.comClassificacao(Classificacao.TINTO)
+				.comAnoSafra(1899)
+				.comFabricante("Concha Y Toro")
+				.comTeorAlcoolico(4.5F)
+				.comPaisOrigem("Chile")
+				.comUsuario(criarUsuario())
+				.build();		
 		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
 
 		assertEquals(1, violacoesValidacao.size());
@@ -116,16 +125,17 @@ public class VinhoTest {
 	
 	@Test
 	public void testDeveValidarAnoSafraMaiorMaximo() {
-		Vinho vinho = new Vinho();
-		vinho.setId(1L);
-		vinho.setNome("Casillero Del Diablo");
-		vinho.setUva(Uva.CABERNET_SAUVIGNON);
-		vinho.setClassificacao(Classificacao.TINTO);
-		vinho.setAnoSafra(2018);
-		vinho.setFabricante("Concha Y Toro");
-		vinho.setTeorAlcoolico(4.5F);
-		vinho.setPaisOrigem("Chile");
-		vinho.setUsuario(criarUsuario());
+		Vinho vinho = vinhoBuilder
+				.comId(1L)
+				.comNome("Casilleto Del Diablo")
+				.comUva(Uva.CABERNET_SAUVIGNON)
+				.comClassificacao(Classificacao.TINTO)
+				.comAnoSafra(2018)
+				.comFabricante("Concha Y Toro")
+				.comTeorAlcoolico(4.5F)
+				.comPaisOrigem("Chile")
+				.comUsuario(criarUsuario())
+				.build();
 		
 		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
 
@@ -135,15 +145,16 @@ public class VinhoTest {
 	
 	@Test
 	public void testDeveValidarFabricanteNulo() {
-		Vinho vinho = new Vinho();
-		vinho.setId(1L);
-		vinho.setNome("Casillero Del Diablo");
-		vinho.setUva(Uva.CABERNET_SAUVIGNON);
-		vinho.setClassificacao(Classificacao.TINTO);
-		vinho.setAnoSafra(2012);
-		vinho.setTeorAlcoolico(4.5F);
-		vinho.setPaisOrigem("Chile");
-		vinho.setUsuario(criarUsuario());
+		Vinho vinho = vinhoBuilder
+				.comId(1L)
+				.comNome("Casilleto Del Diablo")
+				.comUva(Uva.CABERNET_SAUVIGNON)
+				.comClassificacao(Classificacao.TINTO)
+				.comAnoSafra(2012)
+				.comTeorAlcoolico(4.5F)
+				.comPaisOrigem("Chile")
+				.comUsuario(criarUsuario())
+				.build();
 		
 		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
 
@@ -153,15 +164,16 @@ public class VinhoTest {
 	
 	@Test
 	public void testDeveValidarPaisOrigemNulo() {
-		Vinho vinho = new Vinho();
-		vinho.setId(1L);
-		vinho.setNome("Casillero Del Diablo");
-		vinho.setUva(Uva.CABERNET_SAUVIGNON);
-		vinho.setClassificacao(Classificacao.TINTO);
-		vinho.setAnoSafra(2012);
-		vinho.setFabricante("Concha Y Toro");
-		vinho.setTeorAlcoolico(4.5F);
-		vinho.setUsuario(criarUsuario());
+		Vinho vinho = vinhoBuilder
+				.comId(1L)
+				.comNome("Casilleto Del Diablo")
+				.comUva(Uva.CABERNET_SAUVIGNON)
+				.comClassificacao(Classificacao.TINTO)
+				.comAnoSafra(2012)
+				.comFabricante("Concha Y Toro")
+				.comTeorAlcoolico(4.5F)
+				.comUsuario(criarUsuario())
+				.build();
 		
 		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
 
@@ -171,15 +183,16 @@ public class VinhoTest {
 	
 	@Test
 	public void testDeveValidarUsuarioNulo() {
-		Vinho vinho = new Vinho();
-		vinho.setId(1L);
-		vinho.setNome("Casillero Del Diablo");
-		vinho.setUva(Uva.CABERNET_SAUVIGNON);
-		vinho.setClassificacao(Classificacao.TINTO);
-		vinho.setAnoSafra(2012);
-		vinho.setFabricante("Concha Y Toro");
-		vinho.setTeorAlcoolico(4.5F);
-		vinho.setPaisOrigem("Chile");
+		Vinho vinho = vinhoBuilder
+				.comId(1L)
+				.comNome("Casilleto Del Diablo")
+				.comUva(Uva.CABERNET_SAUVIGNON)
+				.comClassificacao(Classificacao.TINTO)
+				.comAnoSafra(2012)
+				.comFabricante("Concha Y Toro")
+				.comTeorAlcoolico(4.5F)
+				.comPaisOrigem("Chile")
+				.build();
 		
 		Set<ConstraintViolation<Vinho>> violacoesValidacao = validator.validate(vinho);
 
@@ -188,12 +201,14 @@ public class VinhoTest {
 	}
 	
 	private Usuario criarUsuario() {
-		Usuario usuario = new Usuario();
-		usuario.setNome("Rodrigo Peleias");
-		usuario.setEmail("rpeleias@hotmail.com");
-		usuario.setDataCriacao(new Date());
-		usuario.setLogin("rpeleias");
-		usuario.setSenha("123");
+		Usuario usuario = new UsuarioBuilder()
+				.comId(1L)
+				.comNome("Rodrigo Peleias")
+				.comSenha("123")
+				.comLogin("rpeleias")
+				.comDataCriacao(new Date())
+				.comEmail("rpeleias@hotmail.com")
+				.build();
 		
 		return usuario;
 	}
