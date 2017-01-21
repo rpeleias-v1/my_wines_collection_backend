@@ -6,8 +6,10 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,7 +22,7 @@ import com.rodrigopeleias.minhacolecaovinhos.exception.VinhoNaoEncontradoExcepti
 @ControllerAdvice
 public class VinhosControllerAdvice extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler(ConstraintViolationException.class)
+	@ExceptionHandler({ConstraintViolationException.class, DataIntegrityViolationException.class, TransactionSystemException.class})
 	@ResponseBody
 	ResponseEntity<?> handleException(HttpServletRequest request, ConstraintViolationException exception) {
 		HttpStatus status = getStatus(request);
