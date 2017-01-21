@@ -42,7 +42,7 @@ public class VinhoServiceTest {
 		
 		when(this.vinhoRepository.save(vinhoEsperado)).thenReturn(vinhoEsperado);
 		
-		Vinho vinhoCadastrado = this.vinhoService.criar(vinhoEsperado);
+		Vinho vinhoCadastrado = this.vinhoService.cadastrar(vinhoEsperado);
 		assertEquals(vinhoCadastrado, vinhoEsperado);
 	}
 	
@@ -55,6 +55,19 @@ public class VinhoServiceTest {
 		when(this.vinhoRepository.findAll()).thenReturn(vinhosEsperados);
 		
 		List<Vinho> vinhos = this.vinhoService.listarTodos();
+		assertFalse(vinhos.isEmpty());
+		assertEquals(vinhos, vinhosEsperados);
+	}
+	
+	@Test
+	public void testDeveListarVinhosPorLoginUsuario() {
+		Vinho vinhoEsperado = criarVinho();
+		List<Vinho> vinhosEsperados = new ArrayList<>();
+		vinhosEsperados.add(vinhoEsperado);
+		
+		when(this.vinhoRepository.findByLoginUsuario("rpeleias")).thenReturn(vinhosEsperados);
+		
+		List<Vinho> vinhos = this.vinhoService.listarPorLoginUsuario("rpeleias");
 		assertFalse(vinhos.isEmpty());
 		assertEquals(vinhos, vinhosEsperados);
 	}

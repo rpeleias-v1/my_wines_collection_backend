@@ -6,7 +6,7 @@ import com.rodrigopeleias.minhacolecaovinhos.model.Vinho;
 
 public interface VinhoService {
 
-	Vinho criar(Vinho vinho);
+	Vinho cadastrar(Vinho vinho);
 
 	List<Vinho> listarTodos();
 
@@ -15,5 +15,7 @@ public interface VinhoService {
 	void excluir(Long id);
 
 	Vinho atualizar(Long id, Vinho vinho);
+
+	List<Vinho> listarPorLoginUsuario(String login);
 
 }

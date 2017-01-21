@@ -3,8 +3,6 @@ package com.rodrigopeleias.minhacolecaovinhos.advices.mensagens;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
-
 public class MessagemErroCustomizada {
 
 	private Integer status;

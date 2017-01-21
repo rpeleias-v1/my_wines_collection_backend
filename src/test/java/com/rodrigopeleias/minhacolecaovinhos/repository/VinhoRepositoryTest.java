@@ -1,9 +1,11 @@
 package com.rodrigopeleias.minhacolecaovinhos.repository;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.ConstraintViolationException;
 
@@ -27,9 +29,6 @@ public class VinhoRepositoryTest {
 
 	@Autowired
 	private TestEntityManager testEntityManager;
-	
-	@Autowired
-	private UsuarioRepository usuarioRepository;
 	
 	@Autowired
 	private VinhoRepository vinhoRepository;
@@ -73,12 +72,12 @@ public class VinhoRepositoryTest {
 	public void testDeveRetornarVinhoPorLoginUsuario() {
 		Vinho vinho = criarVinho();
 		
-		this.vinhoRepository.save(vinho);
+		this.testEntityManager.persist(vinho);
 		
-		Vinho vinhoPorUsuario = this.vinhoRepository.findByLoginUsuario(vinho.getUsuario().getLogin());
+		List<Vinho> vinhosPorUsuario = this.vinhoRepository.findByLoginUsuario(vinho.getUsuario().getLogin());
 		
-		assertNotNull(vinhoPorUsuario);
-		assertEquals(vinhoPorUsuario.getUsuario().getLogin(), vinho.getUsuario().getLogin());
+		assertFalse(vinhosPorUsuario.isEmpty());
+		assertEquals(vinhosPorUsuario.get(0).getUsuario().getLogin(), vinho.getUsuario().getLogin());
 		
 	}
 
@@ -105,7 +104,7 @@ public class VinhoRepositoryTest {
 				.comEmail("rpeleias@hotmail.com")
 				.build();
 		
-		this.usuarioRepository.save(usuario);
+		this.testEntityManager.persist(usuario);
 		return usuario;
 	}
 

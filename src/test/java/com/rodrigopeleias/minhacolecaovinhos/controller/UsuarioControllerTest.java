@@ -1,25 +1,24 @@
 package com.rodrigopeleias.minhacolecaovinhos.controller;
 
-import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doNothing;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.awt.PageAttributes.MediaType;
 import java.util.Date;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.rodrigopeleias.minhacolecaovinhos.builder.UsuarioBuilder;
 import com.rodrigopeleias.minhacolecaovinhos.model.Usuario;
 import com.rodrigopeleias.minhacolecaovinhos.service.UsuarioService;
@@ -48,8 +47,34 @@ public class UsuarioControllerTest {
 			.andExpect(status().isOk()).andExpect(content().json(usuarioJson));
 	}
 	
+	@Test
+	public void testDeveBuscarUsuarioPorId() throws Exception {
+		Usuario usuario = criarUsuario();
+		given(this.usuarioService.consultar(1L)).willReturn(usuario);
+		String usuarioJson = mapper.writeValueAsString(usuario);
+		this.mockMvc.perform(get("/usuarios/" + 1)
+				.accept(org.springframework.http.MediaType.APPLICATION_JSON))
+			.andExpect(status().isOk()).andExpect(content().json(usuarioJson));
+	}
+	
+	@Test
+	public void testDeveBuscarUsuarioPorIdInvalido() throws Exception {
+		this.mockMvc.perform(get("/usuarios/" + 2)
+				.accept(org.springframework.http.MediaType.APPLICATION_JSON))
+			.andExpect(status().isOk()).andExpect(content().string(""));
+	}
+	
+	@Test
+	public void testDeveExcluirUsuario() throws Exception {
+		doNothing().when(usuarioService).excluir(1L);
+		this.mockMvc.perform(delete("/usuarios/" + 1)
+				.accept(org.springframework.http.MediaType.APPLICATION_JSON))
+			.andExpect(status().isOk()).andExpect(content().string(""));
+	}
+	
 	private Usuario criarUsuario() {
 		Usuario usuario = new UsuarioBuilder()
+				.comId(1L)
 				.comNome("Rodrigo Peleias")
 				.comSenha("123")
 				.comLogin("rpeleias")

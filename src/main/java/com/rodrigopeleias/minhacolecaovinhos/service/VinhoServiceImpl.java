@@ -1,3 +1,4 @@
+
 package com.rodrigopeleias.minhacolecaovinhos.service;
 
 import java.util.List;
@@ -20,13 +21,18 @@ public class VinhoServiceImpl implements VinhoService {
 	}
 
 	@Override
-	public Vinho criar(Vinho vinho) {
+	public Vinho cadastrar(Vinho vinho) {
 		return vinhoRepository.save(vinho);
 	}
 	
 	@Override
 	public List<Vinho> listarTodos() {
 		return vinhoRepository.findAll();
+	}
+	
+	@Override
+	public List<Vinho> listarPorLoginUsuario(String login) {
+		return vinhoRepository.findByLoginUsuario(login);
 	}
 	
 	@Override

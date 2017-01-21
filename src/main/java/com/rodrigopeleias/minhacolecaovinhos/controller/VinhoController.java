@@ -27,17 +27,22 @@ public class VinhoController {
 	}
 
 	@PostMapping
-	public Vinho save(@RequestBody Vinho vinho) {
-		return vinhoService.criar(vinho);
+	public Vinho cadastrar(@RequestBody Vinho vinho) {
+		return vinhoService.cadastrar(vinho);
 	}
 
 	@GetMapping
-	public List<Vinho> findAll() {
+	public List<Vinho> listarTodos() {
 		return vinhoService.listarTodos();
+	}
+	
+	@GetMapping(value = "/login/{login}")
+	public List<Vinho> listarPorLoginUsuario(@PathVariable String login) {
+		return vinhoService.listarPorLoginUsuario(login);
 	}
 
 	@GetMapping(value = "/{id}")
-	public Vinho findOne(@PathVariable Long id) {
+	public Vinho consultar(@PathVariable Long id) {
 		return vinhoService.consultar(id);
 	}
 	
