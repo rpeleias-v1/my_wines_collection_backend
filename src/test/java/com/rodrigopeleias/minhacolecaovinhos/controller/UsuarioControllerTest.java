@@ -8,13 +8,18 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -41,6 +46,17 @@ public class UsuarioControllerTest {
 		Usuario usuario = criarUsuario();
 		given(this.usuarioService.cadastrar(usuario)).willReturn(usuario);
 		String usuarioJson = mapper.writeValueAsString(usuario);
+		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+		list.add(new GrantedAuthority() {
+			@Override
+			public String getAuthority() {
+				// TODO Auto-generated method stub
+				return "ROLE_USER";
+			}
+		});        
+		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(usuario, "teste",list);
+		SecurityContextHolder.getContext().setAuthentication(auth);
+		
 		this.mockMvc.perform(post("/usuarios").content(usuarioJson)
 				.contentType(org.springframework.http.MediaType.APPLICATION_JSON)
 				.accept(org.springframework.http.MediaType.APPLICATION_JSON))

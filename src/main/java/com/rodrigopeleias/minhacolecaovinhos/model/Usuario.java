@@ -8,11 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -20,8 +20,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Usuario {
 
 	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
+	@GeneratedValue
 	private Long id;
 	
 	@NotEmpty(message = "Nome do usuário é um campo obrigatório")
@@ -44,6 +43,9 @@ public class Usuario {
 
 	@OneToMany(fetch = FetchType.EAGER)
 	private List<Vinho> vinhos;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	private List<Permissao> permissoes;
 
 	public Long getId() {
 		return id;
@@ -99,6 +101,14 @@ public class Usuario {
 
 	public void setVinhos(List<Vinho> vinhos) {
 		this.vinhos = vinhos;
+	}
+	
+	public List<Permissao> getPermissoes() {
+		return permissoes;
+	}
+
+	public void setPermissoes(List<Permissao> permissoes) {
+		this.permissoes = permissoes;
 	}
 
 	@Override
