@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.rodrigopeleias.minhacolecaovinhos.model.Permissao;
 import com.rodrigopeleias.minhacolecaovinhos.model.Usuario;
 import com.rodrigopeleias.minhacolecaovinhos.model.Vinho;
 
@@ -16,9 +17,11 @@ public class UsuarioBuilder {
 	private String login;
 	private Date dataCriacao;
 	private List<Vinho> vinhos;
+	private List<Permissao> permissoes;
 
 	public UsuarioBuilder() {
 		this.vinhos = new ArrayList<>();
+		this.permissoes = new ArrayList<>();
 	}
 
 	public UsuarioBuilder comId(Long id) {
@@ -51,8 +54,14 @@ public class UsuarioBuilder {
 		return this;
 	}
 
-	public void comVinho(Vinho vinho) {
+	public UsuarioBuilder comVinho(Vinho vinho) {
 		this.vinhos.add(vinho);
+		return this;
+	}
+	
+	public UsuarioBuilder comPermissoes(Permissao permissao) {
+		this.permissoes.add(permissao);
+		return this;
 	}
 
 	public Usuario build() {
@@ -64,6 +73,7 @@ public class UsuarioBuilder {
 		usuario.setEmail(this.email);
 		usuario.setDataCriacao(this.dataCriacao);
 		usuario.setVinhos(this.vinhos);
+		usuario.setPermissoes(this.permissoes);
 		return usuario;
 	}
 
