@@ -62,6 +62,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter{
 			).permitAll()
 			.antMatchers("/auth/**").permitAll()
 			.antMatchers("/usuarios/**").permitAll()
+			.antMatchers("/vinhos/**").permitAll()
 			.anyRequest().authenticated();
 		
 		httpSecurity.addFilterBefore(authentiationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);

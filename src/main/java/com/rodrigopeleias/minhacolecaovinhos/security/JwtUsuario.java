@@ -3,6 +3,7 @@ package com.rodrigopeleias.minhacolecaovinhos.security;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -43,7 +44,7 @@ public class JwtUsuario implements UserDetails {
 		this.authorities = mapToGrantedAuthorities(usuario.getPermissoes());
 	}
 	
-	private static List<? extends GrantedAuthority> mapToGrantedAuthorities(List<Permissao> permissoes) {
+	private static List<? extends GrantedAuthority> mapToGrantedAuthorities(Set<Permissao> permissoes) {
 		return permissoes.stream()
 				.map(permissao -> new SimpleGrantedAuthority(permissao.getTipo().name()))
 				.collect(Collectors.toList());

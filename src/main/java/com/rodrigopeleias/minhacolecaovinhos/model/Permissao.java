@@ -1,6 +1,7 @@
 package com.rodrigopeleias.minhacolecaovinhos.model;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,8 +24,8 @@ public class Permissao {
 	@Enumerated(EnumType.STRING)
 	private TipoPermissao tipo;
 	
-	@ManyToMany(mappedBy = "permissoes", fetch = FetchType.LAZY)
-	private List<Usuario> usuarios;
+	@ManyToMany(mappedBy = "permissoes")
+	private Set<Usuario> usuarios;
 
 	public Long getId() {
 		return id;
@@ -42,11 +43,11 @@ public class Permissao {
 		this.tipo = tipo;
 	}
 
-	public List<Usuario> getUsuarios() {
+	public Set<Usuario> getUsuarios() {
 		return usuarios;
 	}
 
-	public void setUsuarios(List<Usuario> usuarios) {
+	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
 }

@@ -9,7 +9,6 @@ import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,9 +21,10 @@ import com.rodrigopeleias.minhacolecaovinhos.exception.VinhoNaoEncontradoExcepti
 @ControllerAdvice
 public class VinhosControllerAdvice extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler({ConstraintViolationException.class, DataIntegrityViolationException.class, TransactionSystemException.class})
+	@ExceptionHandler(ConstraintViolationException.class)
 	@ResponseBody
-	ResponseEntity<?> handleException(HttpServletRequest request, ConstraintViolationException exception) {
+	ResponseEntity<?> handleConstraintViolationException(HttpServletRequest request,
+			ConstraintViolationException exception) {
 		HttpStatus status = getStatus(request);
 		MessagemErroCustomizada mensagem = new MessagemErroCustomizada(status.value(),
 				exception.getClass().getSimpleName(), request.getRequestURI());
@@ -36,7 +36,17 @@ public class VinhosControllerAdvice extends ResponseEntityExceptionHandler {
 		}
 		return new ResponseEntity<>(mensagem, status);
 	}
-	
+
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	@ResponseBody
+	ResponseEntity<?> handleDataIntegrityException(HttpServletRequest request,
+			DataIntegrityViolationException exception) {
+		HttpStatus status = getStatus(request);
+		MessagemErroCustomizada mensagem = new MessagemErroCustomizada(status.value(),
+				exception.getClass().getSimpleName(), request.getRequestURI());
+		return new ResponseEntity<>(mensagem, status);
+	}
+
 	@ExceptionHandler(VinhoNaoEncontradoException.class)
 	@ResponseBody
 	ResponseEntity<?> handleException(HttpServletRequest request, VinhoNaoEncontradoException exception) {

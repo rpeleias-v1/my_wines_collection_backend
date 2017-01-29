@@ -2,6 +2,7 @@ package com.rodrigopeleias.minhacolecaovinhos.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,8 +46,8 @@ public class Usuario {
 	@OneToMany(fetch = FetchType.EAGER)
 	private List<Vinho> vinhos;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-	private List<Permissao> permissoes;
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Permissao> permissoes;
 
 	public Long getId() {
 		return id;
@@ -104,11 +105,11 @@ public class Usuario {
 		this.vinhos = vinhos;
 	}
 	
-	public List<Permissao> getPermissoes() {
+	public Set<Permissao> getPermissoes() {
 		return permissoes;
 	}
 
-	public void setPermissoes(List<Permissao> permissoes) {
+	public void setPermissoes(Set<Permissao> permissoes) {
 		this.permissoes = permissoes;
 	}
 

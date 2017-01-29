@@ -2,7 +2,9 @@ package com.rodrigopeleias.minhacolecaovinhos.builder;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.rodrigopeleias.minhacolecaovinhos.model.Permissao;
 import com.rodrigopeleias.minhacolecaovinhos.model.Usuario;
@@ -17,11 +19,11 @@ public class UsuarioBuilder {
 	private String login;
 	private Date dataCriacao;
 	private List<Vinho> vinhos;
-	private List<Permissao> permissoes;
+	private Set<Permissao> permissoes;
 
 	public UsuarioBuilder() {
 		this.vinhos = new ArrayList<>();
-		this.permissoes = new ArrayList<>();
+		this.permissoes = new HashSet<>();
 	}
 
 	public UsuarioBuilder comId(Long id) {
